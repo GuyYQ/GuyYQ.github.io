@@ -1,7 +1,7 @@
 # description
 
 > A blog project
-![Alt text](screen.png)
+![Alt text](screen.jpg)
 ## Build Setup
 
 ``` bash
