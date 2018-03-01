@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 01 Mar 2018 14:20:33 +0800</pubDate>
-    <lastBuildDate>Thu, 01 Mar 2018 14:20:33 +0800</lastBuildDate>
+    <pubDate>Thu, 01 Mar 2018 16:50:25 +0800</pubDate>
+    <lastBuildDate>Thu, 01 Mar 2018 16:50:25 +0800</lastBuildDate>
     <generator>Jekyll v3.7.3</generator>
     
       <item>
@@ -20,125 +20,89 @@
   &lt;li&gt;注册GitHub，建立仓库&lt;/li&gt;
   &lt;li&gt;jekyll环境搭建&lt;/li&gt;
   &lt;li&gt;定制个人博客&lt;/li&gt;
+  &lt;li&gt;部署到github&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&quot;注册github建立仓库&quot;&gt;注册GitHub，建立仓库&lt;/h2&gt;
+&lt;h3 id=&quot;注册github建立仓库&quot;&gt;注册GitHub，建立仓库&lt;/h3&gt;
 
-&lt;h3 id=&quot;注册github&quot;&gt;注册GitHub&lt;/h3&gt;
-&lt;h3 id=&quot;建立仓库&quot;&gt;建立仓库&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;1.&lt;/strong&gt; 创建一个名为 &lt;code class=&quot;highlighter-rouge&quot;&gt;username .github.io&lt;/code&gt; 的新存储库，其中 &lt;code class=&quot;highlighter-rouge&quot;&gt;username&lt;/code&gt; 是您在&lt;a href=&quot;https://pages.github.com&quot;&gt;GitHub&lt;/a&gt;上的用户名（或组织名称）。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1.&lt;/strong&gt; 注册GitHub账号，创建一个名为 &lt;code class=&quot;highlighter-rouge&quot;&gt;username .github.io&lt;/code&gt; 的新存储库，其中 &lt;code class=&quot;highlighter-rouge&quot;&gt;username&lt;/code&gt; 是您在&lt;a href=&quot;https://pages.github.com&quot;&gt;GitHub&lt;/a&gt;上的用户名（或组织名称）。&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/img/posts/jekyll/user-repo@2x.png&quot; alt=&quot;alt text&quot; title=&quot;Logo Title Text 1&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;2.&lt;/strong&gt; Add the pagename to &lt;code class=&quot;highlighter-rouge&quot;&gt;_pages/docs.yml&lt;/code&gt; file in order to list in docs navigation panel:&lt;/p&gt;
+&lt;h3 id=&quot;jekyll环境搭建&quot;&gt;jekyll环境搭建&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;1.&lt;/strong&gt; 安装Ruby &lt;a href=&quot;https://www.ruby-lang.org/zh_cn/downloads/&quot;&gt;官网安装&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;- Mac一般默认安装了Ruby，这一步可以忽略。
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;- title: My Group Title
-  docs:
-  - my-page
+- 注意：勾选 &quot;Add Ruby executables to your PATH&quot;，这样将自动完成环境变量的配置。 
+
+- 安装路径不能包含空格
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;测试Ruby是否安装成功，执行命令&lt;code class=&quot;highlighter-rouge&quot;&gt;ruby -v&lt;/code&gt;，显示版本则代表安装成功。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;2.&lt;/strong&gt; 安装 DevKit &lt;a href=&quot;http://rubyinstaller.org/downloads/&quot;&gt;官网安装&lt;/a&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;在命令窗口下切换到安装目录，并执行以下命令
+
+- ruby dk.rb init
+- ruby dk.rb install
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;blog-posts&quot;&gt;Blog posts&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;3.&lt;/strong&gt; 安装Jekyll，输入：&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;- gem source 'https://rubygems.org'
+- gem 'github-pages'
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;墙内很容易出问题，无法安装，所以推荐使用推荐RubyChina镜像源。&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;//更换gem源
+- gem sources --remove https://rubygems.org/
+- gem sources -a http://gems.ruby-china.org/
 
-&lt;p&gt;Add a new Markdown file such as &lt;code class=&quot;highlighter-rouge&quot;&gt;2017-05-09-my-post.md&lt;/code&gt; and write the content similar to other post examples.&lt;/p&gt;
+//查看gem源
+- gem sources -l
 
-&lt;h3 id=&quot;pages&quot;&gt;Pages&lt;/h3&gt;
+//更新gem
+- gem update --system
 
-&lt;p&gt;The home page is located under &lt;code class=&quot;highlighter-rouge&quot;&gt;index.md&lt;/code&gt; file. You can change the content or design completely different welcome page for your taste.&lt;/p&gt;
+//安装jekyll
+- gem install jekyll
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;In order to add a new page, create a new html or markdown file under root directory and link it in &lt;code class=&quot;highlighter-rouge&quot;&gt;_includes/header.html&lt;/code&gt;.&lt;/p&gt;
+&lt;h3 id=&quot;定制个人博客&quot;&gt;定制个人博客&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;1.&lt;/strong&gt; 创建jekyll工程目录&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;- jekyll new myblog
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;images-todo&quot;&gt;Images TODO&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;2.&lt;/strong&gt; 切换到工程目录，并开启服务&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;- cd myblog
+- jekyll serve
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;Introduce gulp optimization&lt;/p&gt;
+&lt;p&gt;测试Jekyll是否正常开启，访问&lt;a href=&quot;http://localhost:4000&quot;&gt;localhost:4000&lt;/a&gt;&lt;/p&gt;
 
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Breakpoint&lt;/th&gt;
-      &lt;th&gt;Image Type&lt;/th&gt;
-      &lt;th&gt;Width&lt;/th&gt;
-      &lt;th&gt;Retina&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;xs&lt;/td&gt;
-      &lt;td&gt;Post Thumb&lt;/td&gt;
-      &lt;td&gt;535px&lt;/td&gt;
-      &lt;td&gt;1070px&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;sm&lt;/td&gt;
-      &lt;td&gt;Post Thumb&lt;/td&gt;
-      &lt;td&gt;500px&lt;/td&gt;
-      &lt;td&gt;1000px&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;md&lt;/td&gt;
-      &lt;td&gt;Post Thumb&lt;/td&gt;
-      &lt;td&gt;329.375px&lt;/td&gt;
-      &lt;td&gt;658.75px&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;lg&lt;/td&gt;
-      &lt;td&gt;Post Thumb&lt;/td&gt;
-      &lt;td&gt;445.625px&lt;/td&gt;
-      &lt;td&gt;891.25px&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;xl&lt;/td&gt;
-      &lt;td&gt;Post Thumb&lt;/td&gt;
-      &lt;td&gt;353.125px&lt;/td&gt;
-      &lt;td&gt;706.25px&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;3.&lt;/strong&gt; Jekyll使用Liquid语法 &lt;a href=&quot;https://jekyllrb.com/&quot;&gt;查看官网文档&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;- cd myblog
+- jekyll serve
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Breakpoint&lt;/th&gt;
-      &lt;th&gt;Image Type&lt;/th&gt;
-      &lt;th&gt;Width&lt;/th&gt;
-      &lt;th&gt;Retina&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;xs&lt;/td&gt;
-      &lt;td&gt;Post Hero&lt;/td&gt;
-      &lt;td&gt;535px&lt;/td&gt;
-      &lt;td&gt;1070px&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;sm&lt;/td&gt;
-      &lt;td&gt;Post Hero&lt;/td&gt;
-      &lt;td&gt;500px&lt;/td&gt;
-      &lt;td&gt;1000px&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;md&lt;/td&gt;
-      &lt;td&gt;Post Hero&lt;/td&gt;
-      &lt;td&gt;329.375px&lt;/td&gt;
-      &lt;td&gt;658.75px&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;lg&lt;/td&gt;
-      &lt;td&gt;Post Hero&lt;/td&gt;
-      &lt;td&gt;445.625px&lt;/td&gt;
-      &lt;td&gt;891.25px&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;xl&lt;/td&gt;
-      &lt;td&gt;Post Hero&lt;/td&gt;
-      &lt;td&gt;353.125px&lt;/td&gt;
-      &lt;td&gt;706.25px&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;4.&lt;/strong&gt; 自定义个人博客页面或下载 &lt;a href=&quot;http://jekyllthemes.org/&quot;&gt;Jekyll模板&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;Happy hacking!&lt;/p&gt;
+&lt;h3 id=&quot;部署到github&quot;&gt;部署到github&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;1.&lt;/strong&gt; 克隆仓库到本地：&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;- git clone 项目地址
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;2.&lt;/strong&gt;提交代码到线上：&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;- git add .
+
+- git commit -m &quot;提交jekyll默认页面&quot;
+
+- git push origin master 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;在浏览器里面输入网址：http://yourname.github.io 就可以看你的个人博客网站了。&lt;/p&gt;
+
+&lt;p&gt;好啦，到这里你的个人博客就搭建完成啦°˖✧◝(⁰▿⁰)◜✧˖°&lt;/p&gt;
+
+&lt;p&gt;我的博客的&lt;a href=&quot;https://github.com/GuyYQ/GuyYQ.github.io&quot;&gt;源代码&lt;/a&gt;就在这里啦 
+喜欢就star一下哦&lt;/p&gt;
 
 </description>
         <pubDate>Thu, 01 Mar 2018 00:00:00 +0800</pubDate>
