@@ -294,5 +294,28 @@
     color: #fff;
 }
 
+@media (max-width: 75em){
+    .site-name__inner .name {
+        font-size: 30px;
+        font-family: 'Source Sans Pro', sans-serif;
+        text-align: center;
+    }
+    .desc{
+        text-align: center;
+    }
+    .site-name__inner .btn {
+        margin-right: 50px;
+    }
+    .hours{
+        display: none;
+    }
+    .seconds{
+        display: none;
+    }
+    .minutes{
+        display: none;
+    }
+}
+
 
 
