@@ -1,0 +1,33 @@
+.header-home{
+    box-shadow: 2px 4px 5px rgba(3,3,3,0.2);
+}
+
+.site__content{
+  background: #eee;
+  margin-top: 90px;
+}
+
+.post-con{
+  background: #fff;
+  padding-top: 20px;
+}
+
+.site{
+  background: #eee;
+}
+
+.title-post{
+  padding: .2em 3%;
+  font-size: 170%;
+  line-height: 1.5;
+  word-wrap: break-word;
+  word-break: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  border-left: 5px solid #2ca6cb;
+  color: #2ca6cb;
+  font-family: "covered_by_your_graceregular"
+}
+
+
+/*# sourceMappingURL=maps/main.css.map */
