@@ -2,6 +2,7 @@
 layout: post
 title: Getting Started with Jekyll
 featured-img: sleek
+author: guyuqing
 ---
 
 ## Getting started

@@ -29,5 +29,16 @@
   font-family: "covered_by_your_graceregular"
 }
 
+.author-post{
+  text-align: right;
+  padding-bottom: 1em;
+  border-bottom: 1px solid #dbdbdb;
+}
+
+.author-post .author{
+  color: #2ca6cb;
+  
+}
+
 
 /*# sourceMappingURL=maps/main.css.map */
