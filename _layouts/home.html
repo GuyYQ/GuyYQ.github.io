@@ -12,13 +12,14 @@
       <div class='minutes'></div>
       <div class="site-name">
         <div class="site-name__inner">
-          <div class="name">{{ site.title }}</div>
+          <div class="name"></div>
           <div class="desc">{{ site.description }}</div>
           <div class="btn"><a class="page-link" href="{{ '/blog' | relative_url }}">进入我的blog</a></div>
         </div>
       </div>
     </div>
-
+    <script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js">
+    </script>
 <script>
   setInterval(function() {
     var seconds = new Date().getSeconds();
@@ -48,6 +49,20 @@
 
     hoursSel.innerHTML = hours;
   }, 1000);
+  
+  var year = new Date().getFullYear();
+  var month = new Date().getMonth() + 1;
+  var day = new Date().getDate();
+  var date = '今日' + year + '年' + month + '月' + day +'日';
+  var yearMD = document.querySelector(".name");
+  yearMD.innerHTML = date;
+  // $.ajax({
+  //   type: 'GET',
+  //   url : 'http://cn.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1', //返回bing每日最新背景图, 可选参数[w,h]
+  //   success: function(data){
+  //     console.log(data);      
+  //   }
+  // })
 
 </script>
 

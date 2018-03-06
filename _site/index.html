@@ -6,14 +6,14 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>MY WORLD</title>
-  <meta name="description" content="Veni Vidi Vici.
+  <title></title>
+  <meta name="description" content="莫等闲、白了少年头，空悲切。
 ">
   <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:600' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="/css/main.css">
   <link rel="canonical" href="http://localhost:4000/">
-  <link rel="alternate" type="application/rss+xml" title="MY WORLD" href="http://localhost:4000/feed.xml" />
+  <link rel="alternate" type="application/rss+xml" title="" href="http://localhost:4000/feed.xml" />
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/icons/gu.png?v=qA3OXqyw77">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/icons/gu32x32.png?v=qA3OXqyw77">
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/icons/gu16x16.png?v=qA3OXqyw77">
@@ -31,14 +31,15 @@
       <div class='minutes'></div>
       <div class="site-name">
         <div class="site-name__inner">
-          <div class="name">MY WORLD</div>
-          <div class="desc">Veni Vidi Vici.
+          <div class="name"></div>
+          <div class="desc">莫等闲、白了少年头，空悲切。
 </div>
           <div class="btn"><a class="page-link" href="/blog">进入我的blog</a></div>
         </div>
       </div>
     </div>
-
+    <script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js">
+    </script>
 <script>
   setInterval(function() {
     var seconds = new Date().getSeconds();
@@ -68,6 +69,20 @@
 
     hoursSel.innerHTML = hours;
   }, 1000);
+  
+  var year = new Date().getFullYear();
+  var month = new Date().getMonth() + 1;
+  var day = new Date().getDate();
+  var date = '今日' + year + '年' + month + '月' + day +'日';
+  var yearMD = document.querySelector(".name");
+  yearMD.innerHTML = date;
+  // $.ajax({
+  //   type: 'GET',
+  //   url : 'http://cn.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1', //返回bing每日最新背景图, 可选参数[w,h]
+  //   success: function(data){
+  //     console.log(data);      
+  //   }
+  // })
 
 </script>
 

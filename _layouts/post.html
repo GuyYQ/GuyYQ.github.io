@@ -28,9 +28,8 @@ layout: compress
       <p class="title-post">{{page.title}}</p>
       <p class="author-post">
         发表于    
-        {% assign date_format = site.sleek.date_format | default: "%b %-d, %Y" %}
         <span class="post-card__meta">
-          <time>{{ page.date | date: date_format }}</time>
+          <time>{{ page.date | date: "%F" }}</time>
         </span>
         by 
         <span class="author">{{page.author}}</span>  

@@ -1,8 +1,8 @@
 # Site settings
-title: MY WORLD
+title: ""
 email: your-email@domain.com
 description: > # this means to ignore newlines until "baseurl:"
-  Veni Vidi Vici.
+  莫等闲、白了少年头，空悲切。
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "GuyYQ.github.io" # the base hostname & protocol for your site
 github_username:  GuyYQ

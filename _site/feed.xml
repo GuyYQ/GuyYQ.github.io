@@ -1,14 +1,104 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>MY WORLD</title>
-    <description>Veni Vidi Vici.
+    <title></title>
+    <description>莫等闲、白了少年头，空悲切。
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 05 Mar 2018 13:45:45 +0800</pubDate>
-    <lastBuildDate>Mon, 05 Mar 2018 13:45:45 +0800</lastBuildDate>
+    <pubDate>Tue, 06 Mar 2018 14:43:42 +0800</pubDate>
+    <lastBuildDate>Tue, 06 Mar 2018 14:43:42 +0800</lastBuildDate>
     <generator>Jekyll v3.7.3</generator>
+    
+      <item>
+        <title>ECMAScript 6 入门</title>
+        <description>&lt;p&gt;本文参考《&lt;a href=&quot;http://es6.ruanyifeng.com/&quot;&gt;ECMAScript6入门&lt;/a&gt;》（阮一峰 著）&lt;/p&gt;
+
+&lt;h2 id=&quot;ecmascript-6-简介&quot;&gt;ECMAScript 6 简介&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;1.&lt;/strong&gt; ECMAScript 和 JavaScript 的关系&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;一个常见的问题是，ECMAScript 和 JavaScript 到底是什么关系？&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;要讲清楚这个问题，需要回顾历史。1996 年 11 月，JavaScript 的创造者 Netscape 公司，决定将 JavaScript 提交给标准化组织 ECMA，希望这种语言能够成为国际标准。次年，ECMA 发布 262 号标准文件（ECMA-262）的第一版，规定了浏览器脚本语言的标准，并将这种语言称为 ECMAScript，这个版本就是 1.0 版。&lt;/p&gt;
+
+&lt;p&gt;该标准从一开始就是针对 JavaScript 语言制定的，但是之所以不叫 JavaScript，有两个原因。一是商标，Java 是 Sun 公司的商标，根据授权协议，只有 Netscape 公司可以合法地使用 JavaScript 这个名字，且 JavaScript 本身也已经被 Netscape 公司注册为商标。二是想体现这门语言的制定者是 ECMA，不是 Netscape，这样有利于保证这门语言的开放性和中立性。&lt;/p&gt;
+
+&lt;p&gt;因此，ECMAScript 和 JavaScript 的关系是，前者是后者的规格，后者是前者的一种实现（另外的 ECMAScript 方言还有 Jscript 和 ActionScript）。日常场合，这两个词是可以互换的。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;2.&lt;/strong&gt; ES6 与 ECMAScript 2015 的关系？&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ECMAScript 2015（简称 ES2015）这个词，也是经常可以看到的。它与 ES6 是什么关系呢？&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;2011 年，ECMAScript 5.1 版发布后，就开始制定 6.0 版了。因此，ES6 这个词的原意，就是指 JavaScript 语言的下一个版本。&lt;/p&gt;
+
+&lt;p&gt;但是，因为这个版本引入的语法功能太多，而且制定过程当中，还有很多组织和个人不断提交新功能。事情很快就变得清楚了，不可能在一个版本里面包括所有将要引入的功能。常规的做法是先发布 6.0 版，过一段时间再发 6.1 版，然后是 6.2 版、6.3 版等等。&lt;/p&gt;
+
+&lt;p&gt;但是，标准的制定者不想这样做。他们想让标准的升级成为常规流程：任何人在任何时候，都可以向标准委员会提交新语法的提案，然后标准委员会每个月开一次会，评估这些提案是否可以接受，需要哪些改进。如果经过多次会议以后，一个提案足够成熟了，就可以正式进入标准了。这就是说，标准的版本升级成为了一个不断滚动的流程，每个月都会有变动。&lt;/p&gt;
+
+&lt;p&gt;标准委员会最终决定，标准在每年的 6 月份正式发布一次，作为当年的正式版本。接下来的时间，就在这个版本的基础上做改动，直到下一年的 6 月份，草案就自然变成了新一年的版本。这样一来，就不需要以前的版本号了，只要用年份标记就可以了。&lt;/p&gt;
+
+&lt;p&gt;ES6 的第一个版本，就这样在 2015 年 6 月发布了，正式名称就是《ECMAScript 2015 标准》（简称 ES2015）。2016 年 6 月，小幅修订的《ECMAScript 2016 标准》（简称 ES2016）如期发布，这个版本可以看作是 ES6.1 版，因为两者的差异非常小（只新增了数组实例的includes方法和指数运算符），基本上是同一个标准。根据计划，2017 年 6 月发布 ES2017 标准。&lt;/p&gt;
+
+&lt;p&gt;因此，ES6 既是一个历史名词，也是一个泛指，含义是 5.1 版以后的 JavaScript 的下一代标准，涵盖了 ES2015、ES2016、ES2017 等等，而 ES2015 则是正式名称，特指该年发布的正式版本的语言标准。本书中提到 ES6 的地方，一般是指 ES2015 标准，但有时也是泛指“下一代 JavaScript 语言”。&lt;/p&gt;
+
+&lt;h2 id=&quot;ecmascript-6-基本特性&quot;&gt;ECMAScript 6 基本特性&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;1.&lt;/strong&gt; 变量声明const和let&lt;/p&gt;
+
+&lt;p&gt;ES6 新增了&lt;code class=&quot;highlighter-rouge&quot;&gt;let&lt;/code&gt;命令，用来声明变量。它的用法类似于&lt;code class=&quot;highlighter-rouge&quot;&gt;var&lt;/code&gt;，但是所声明的变量只在&lt;code class=&quot;highlighter-rouge&quot;&gt;let&lt;/code&gt;命令所在的代码块内有效。&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  {
+    let a = 10;
+    var b = 1;
+  }
+
+  a // ReferenceError: a is not defined.
+  b // 1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;上面代码在代码块之中，分别用&lt;code class=&quot;highlighter-rouge&quot;&gt;let&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;var&lt;/code&gt;声明了两个变量。然后在代码块之外调用这两个变量，结果&lt;code class=&quot;highlighter-rouge&quot;&gt;let&lt;/code&gt;声明的变量报错，&lt;code class=&quot;highlighter-rouge&quot;&gt;var&lt;/code&gt;声明的变量返回了正确的值。这表明，&lt;code class=&quot;highlighter-rouge&quot;&gt;let&lt;/code&gt;声明的变量只在它所在的代码块有效。&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;for&lt;/code&gt;循环的计数器，就很合适使用&lt;code class=&quot;highlighter-rouge&quot;&gt;let&lt;/code&gt;命令。&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  for (let i = 0; i &amp;lt; 10; i++) {
+    // ...
+  }
+
+  console.log(i);
+  // ReferenceError: i is not defined
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;上面代码中，计数器&lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt;只在&lt;code class=&quot;highlighter-rouge&quot;&gt;for&lt;/code&gt;循环体内有效，在循环体外引用就会报错。&lt;/p&gt;
+
+&lt;p&gt;下面的代码如果使用&lt;code class=&quot;highlighter-rouge&quot;&gt;var&lt;/code&gt;，最后输出的是&lt;code class=&quot;highlighter-rouge&quot;&gt;10&lt;/code&gt;。&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  var a = [];
+  for (var i = 0; i &amp;lt; 10; i++) {
+    a[i] = function () {
+      console.log(i);
+    };
+  }
+  a[6](); // 10
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;上面代码中，变量&lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt;是&lt;code class=&quot;highlighter-rouge&quot;&gt;var&lt;/code&gt;命令声明的，在全局范围内都有效，所以全局只有一个变量&lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt;。每一次循环，变量i的值都会发生改变，而循环内被赋给数组&lt;code class=&quot;highlighter-rouge&quot;&gt;a&lt;/code&gt;的函数内部的&lt;code class=&quot;highlighter-rouge&quot;&gt;console.log(i)&lt;/code&gt;，里面的&lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt;指向的就是全局的&lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt;。也就是说，所有数组&lt;code class=&quot;highlighter-rouge&quot;&gt;a&lt;/code&gt;的成员里面的&lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt;，指向的都是同一个&lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt;，导致运行时输出的是最后一轮的&lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt;的值，也就是 &lt;code class=&quot;highlighter-rouge&quot;&gt;10&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;如果使用&lt;code class=&quot;highlighter-rouge&quot;&gt;let&lt;/code&gt;，声明的变量仅在块级作用域内有效，最后输出的是 &lt;code class=&quot;highlighter-rouge&quot;&gt;6&lt;/code&gt;。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  var a = [];
+  for (let i = 0; i &amp;lt; 10; i++) {
+    a[i] = function () {
+      console.log(i);
+    };
+  }
+  a[6](); // 6
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;上面代码中，变量&lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt;是&lt;code class=&quot;highlighter-rouge&quot;&gt;let&lt;/code&gt;声明的，当前的i只在本轮循环有效，所以每一次循环的&lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt;其实都是一个新的变量，所以最后输出的是6。你可能会问，如果每一轮循环的变量&lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt;都是重新声明的，那它怎么知道上一轮循环的值，从而计算出本轮循环的值？这是因为 &lt;code class=&quot;highlighter-rouge&quot;&gt;JavaScript&lt;/code&gt; 引擎内部会记住上一轮循环的值，初始化本轮的变量&lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt;时，就在上一轮循环的基础上进行计算。&lt;/p&gt;
+
+&lt;p&gt;另外，&lt;code class=&quot;highlighter-rouge&quot;&gt;for&lt;/code&gt;循环还有一个特别之处，就是设置循环变量的那部分是一个父作用域，而循环体内部是一个单独的子作用域。&lt;/p&gt;
+
+</description>
+        <pubDate>Mon, 05 Mar 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2018/03/05/es6.html</link>
+        <guid isPermaLink="true">http://localhost:4000/2018/03/05/es6.html</guid>
+        
+        
+      </item>
     
       <item>
         <title>使用jekyll搭建个人博客</title>
