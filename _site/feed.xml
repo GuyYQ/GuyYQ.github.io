@@ -6,9 +6,115 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 06 Mar 2018 14:51:06 +0800</pubDate>
-    <lastBuildDate>Tue, 06 Mar 2018 14:51:06 +0800</lastBuildDate>
+    <pubDate>Tue, 06 Mar 2018 18:04:46 +0800</pubDate>
+    <lastBuildDate>Tue, 06 Mar 2018 18:04:46 +0800</lastBuildDate>
     <generator>Jekyll v3.7.3</generator>
+    
+      <item>
+        <title>面向对象</title>
+        <description>&lt;h2 id=&quot;1对象的定义&quot;&gt;&lt;strong&gt;1.&lt;/strong&gt;对象的定义&lt;/h2&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;在ECMAScript-262中，对象被定义为“无序属性的集合，其属性可以包含基本值，对象或者函数”。也就是说，在JavaScript中，对象无非就是由一些列无序的key-value对组成。其中value可以是基本值，对象或者函数。&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  // 这里的person就是一个对象
+  var person = {
+      name: 'Tom',
+      age: 18,
+      getName: function() {},
+      parent: {}
+  }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;创建对象&quot;&gt;创建对象&lt;/h3&gt;
+
+&lt;p&gt;我们可以通过new的方式创建一个对象。&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  var obj = new Object();
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;也可以通过对象字面量的形式创建一个简单的对象。&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  var obj = {};
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;当我们想要给我们创建的简单对象添加方法时，可以这样表示。&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  // 可以这样
+  var person = {};
+  person.name = &quot;TOM&quot;;
+  person.getName = function() {
+      return this.name;
+  }
+
+  // 也可以这样
+  var person = {
+      name: &quot;TOM&quot;,
+      getName: function() {
+          return this.name;
+      }
+  }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;访问对象的属性和方法&quot;&gt;访问对象的属性和方法&lt;/h3&gt;
+
+&lt;p&gt;假如我们有一个简单的对象如下：&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  var person = {
+    name: 'TOM',
+    age: '20',
+    getName: function() {
+        return this.name
+    }
+  }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;当我们想要访问他的name属性时，可以用如下两种方式访问。&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  person.name
+  // 或
+  person['name']
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;如果我们想要访问的属性名是一个变量时，常常会使用第二种方式。例如我们要同时访问&lt;code class=&quot;highlighter-rouge&quot;&gt;person&lt;/code&gt;的&lt;code class=&quot;highlighter-rouge&quot;&gt;name&lt;/code&gt;与&lt;code class=&quot;highlighter-rouge&quot;&gt;age&lt;/code&gt;，可以这样写：&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  ['name', 'age'].forEach(function(item) {
+      console.log(person[item]);
+  })
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;2工厂模式&quot;&gt;&lt;strong&gt;2.&lt;/strong&gt;工厂模式&lt;/h2&gt;
+
+&lt;p&gt;使用上面的方式创建对象很简单，但是在很多时候并不能满足我们的需求。就以person对象为例。假如我们在实际开发中，不仅仅需要一个名字叫做TOM的person对象，同时还需要另外一个名为Jake的person对象，虽然他们有很多相似之处，但是我们不得不重复写两次。&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  var perTom = {
+      name: 'TOM',
+      age: 20,
+      getName: function() {
+          return this.name
+      }
+  };
+
+  var perJake = {
+      name: 'Jake',
+      age: 22,
+      getName: function() {
+          return this.name
+      }
+  }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;我们可以使用工厂模式的方式解决这个问题。顾名思义，工厂模式就是我们提供一个模子，然后通过这个模子复制出我们需要的对象。我们需要多少个，就复制多少个。&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  var createPerson = function (name, age) {
+    	// 声明一个对象，该对象就是工厂模式的模子
+    	var o = new Object();
+			// 依次添加我们需要的属性和方法
+			o.name = name;
+			o.age = age;
+			o.getName = function () {
+				return this.name;
+			}
+			return o;
+  	}
+		// 创建两个实例
+		var perTom = createPerson('TOM', 20);
+		var perJake = createPerson('Jake', 20);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</description>
+        <pubDate>Tue, 06 Mar 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2018/03/06/object.html</link>
+        <guid isPermaLink="true">http://localhost:4000/2018/03/06/object.html</guid>
+        
+        
+      </item>
     
       <item>
         <title>ECMAScript 6 入门</title>
@@ -16,7 +122,7 @@
 
 &lt;h2 id=&quot;ecmascript-6-简介&quot;&gt;ECMAScript 6 简介&lt;/h2&gt;
 
-&lt;p&gt;&lt;strong&gt;1.&lt;/strong&gt; ECMAScript 和 JavaScript 的关系&lt;/p&gt;
+&lt;h3 id=&quot;1-ecmascript-和-javascript-的关系&quot;&gt;&lt;strong&gt;1.&lt;/strong&gt; ECMAScript 和 JavaScript 的关系&lt;/h3&gt;
 
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;一个常见的问题是，ECMAScript 和 JavaScript 到底是什么关系？&lt;/code&gt;&lt;/p&gt;
 
@@ -26,7 +132,7 @@
 
 &lt;p&gt;因此，ECMAScript 和 JavaScript 的关系是，前者是后者的规格，后者是前者的一种实现（另外的 ECMAScript 方言还有 Jscript 和 ActionScript）。日常场合，这两个词是可以互换的。&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;2.&lt;/strong&gt; ES6 与 ECMAScript 2015 的关系？&lt;/p&gt;
+&lt;h3 id=&quot;2-es6-与-ecmascript-2015-的关系&quot;&gt;&lt;strong&gt;2.&lt;/strong&gt; ES6 与 ECMAScript 2015 的关系？&lt;/h3&gt;
 
 &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ECMAScript 2015（简称 ES2015）这个词，也是经常可以看到的。它与 ES6 是什么关系呢？&lt;/code&gt;&lt;/p&gt;
 
@@ -44,7 +150,7 @@
 
 &lt;h2 id=&quot;ecmascript-6-基本特性&quot;&gt;ECMAScript 6 基本特性&lt;/h2&gt;
 
-&lt;p&gt;&lt;strong&gt;1.&lt;/strong&gt; 变量声明const和let&lt;/p&gt;
+&lt;h3 id=&quot;1-变量声明const和let&quot;&gt;&lt;strong&gt;1.&lt;/strong&gt; 变量声明const和let&lt;/h3&gt;
 
 &lt;p&gt;ES6 新增了&lt;code class=&quot;highlighter-rouge&quot;&gt;let&lt;/code&gt;命令，用来声明变量。它的用法类似于&lt;code class=&quot;highlighter-rouge&quot;&gt;var&lt;/code&gt;，但是所声明的变量只在&lt;code class=&quot;highlighter-rouge&quot;&gt;let&lt;/code&gt;命令所在的代码块内有效。&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  {
@@ -78,6 +184,18 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;上面代码中，变量&lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt;是&lt;code class=&quot;highlighter-rouge&quot;&gt;var&lt;/code&gt;命令声明的，在全局范围内都有效，所以全局只有一个变量&lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt;。每一次循环，变量i的值都会发生改变，而循环内被赋给数组&lt;code class=&quot;highlighter-rouge&quot;&gt;a&lt;/code&gt;的函数内部的&lt;code class=&quot;highlighter-rouge&quot;&gt;console.log(i)&lt;/code&gt;，里面的&lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt;指向的就是全局的&lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt;。也就是说，所有数组&lt;code class=&quot;highlighter-rouge&quot;&gt;a&lt;/code&gt;的成员里面的&lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt;，指向的都是同一个&lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt;，导致运行时输出的是最后一轮的&lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt;的值，也就是 &lt;code class=&quot;highlighter-rouge&quot;&gt;10&lt;/code&gt;。&lt;/p&gt;
 
+&lt;p&gt;如果想要输出&lt;code class=&quot;highlighter-rouge&quot;&gt;6&lt;/code&gt;，ES5告诉我们可以用闭包解决这个问题&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  var a = []
+  for (var i = 0; i &amp;lt; 10; i++) {
+    a[i] = (function (i) {
+      return function () {
+        console.log(i);
+      }
+    })(i)
+  }
+  a[6](); //6
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
 &lt;p&gt;如果使用&lt;code class=&quot;highlighter-rouge&quot;&gt;let&lt;/code&gt;，声明的变量仅在块级作用域内有效，最后输出的是 &lt;code class=&quot;highlighter-rouge&quot;&gt;6&lt;/code&gt;。&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  var a = [];
@@ -91,7 +209,28 @@
 &lt;p&gt;上面代码中，变量&lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt;是&lt;code class=&quot;highlighter-rouge&quot;&gt;let&lt;/code&gt;声明的，当前的i只在本轮循环有效，所以每一次循环的&lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt;其实都是一个新的变量，所以最后输出的是6。你可能会问，如果每一轮循环的变量&lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt;都是重新声明的，那它怎么知道上一轮循环的值，从而计算出本轮循环的值？这是因为 &lt;code class=&quot;highlighter-rouge&quot;&gt;JavaScript&lt;/code&gt; 引擎内部会记住上一轮循环的值，初始化本轮的变量&lt;code class=&quot;highlighter-rouge&quot;&gt;i&lt;/code&gt;时，就在上一轮循环的基础上进行计算。&lt;/p&gt;
 
 &lt;p&gt;另外，&lt;code class=&quot;highlighter-rouge&quot;&gt;for&lt;/code&gt;循环还有一个特别之处，就是设置循环变量的那部分是一个父作用域，而循环体内部是一个单独的子作用域。&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  for (let i = 0; i &amp;lt; 3; i++) {
+    let i = 'abc';
+    console.log(i);
+  }
+  // abc
+  // abc
+  // abc
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;上面代码正确运行，输出了 3 次abc。这表明函数内部的变量i与循环变量i不在同一个作用域，有各自单独的作用域。&lt;/p&gt;
 
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;var&lt;/code&gt;命令会发生“变量提升”现象，即变量可以在声明之前使用，值为&lt;code class=&quot;highlighter-rouge&quot;&gt;undefined&lt;/code&gt;。这种现象多多少少是有些奇怪的，按照一般的逻辑，变量应该在声明语句之后才可以使用。&lt;/p&gt;
+
+&lt;p&gt;为了纠正这种现象，&lt;code class=&quot;highlighter-rouge&quot;&gt;let&lt;/code&gt;命令改变了语法行为，它所声明的变量一定要在声明后使用，否则报错。&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;// var 的情况
+console.log(foo); // 输出undefined
+var foo = 2;
+
+// let 的情况
+console.log(bar); // 报错ReferenceError
+let bar = 2;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;上面代码中，变量&lt;code class=&quot;highlighter-rouge&quot;&gt;foo&lt;/code&gt;用&lt;code class=&quot;highlighter-rouge&quot;&gt;var&lt;/code&gt;命令声明，会发生变量提升，即脚本开始运行时，变量&lt;code class=&quot;highlighter-rouge&quot;&gt;foo&lt;/code&gt;已经存在了，但是没有值，所以会输出&lt;code class=&quot;highlighter-rouge&quot;&gt;undefined&lt;/code&gt;。变量&lt;code class=&quot;highlighter-rouge&quot;&gt;bar&lt;/code&gt;用&lt;code class=&quot;highlighter-rouge&quot;&gt;let&lt;/code&gt;命令声明，不会发生变量提升。这表示在声明它之前，变量&lt;code class=&quot;highlighter-rouge&quot;&gt;bar&lt;/code&gt;是不存在的，这时如果用到它，就会抛出一个错误。&lt;/p&gt;
 </description>
         <pubDate>Mon, 05 Mar 2018 00:00:00 +0800</pubDate>
         <link>http://localhost:4000/2018/03/05/es6.html</link>
