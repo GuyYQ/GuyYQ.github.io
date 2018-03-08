@@ -175,7 +175,9 @@ console.log(foo instanceof Function); // true
         Child.prototype = new F();
         Child.prototype.constructor = Clild;
         Child.uber = Parent.prototype;
-        &lt;!-- 这里的意思是为子对象设置一个uber属性，直接指向父对象的prototype属性。这等于在子对象上打开一条通道，可以直接调用父对象的方法。这一行放在这里，只是为了实现继承的完备性，纯属备用性质 --&gt;
+        这里的意思是为子对象设置一个uber属性，直接指向父对象的prototype属性。
+        这等于在子对象上打开一条通道，可以直接调用父对象的方法。
+        这一行放在这里，只是为了实现继承的完备性，纯属备用性质 
     }
 </code></pre></div></div> <p>使用的时候</p> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    extend(Cat, Animal);
     var cat1 = new Cat("大黑", "黑色");
@@ -193,4 +195,50 @@ console.log(foo instanceof Function); // true
 </code></pre></div></div> <p>这个函数的作用，就是将父对象的<code class="highlighter-rouge">prototype</code>对象中的属性，一一拷贝给<code class="highlighter-rouge">Child</code>对象的<code class="highlighter-rouge">prototype</code>对象。 使用的时候</p> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    extend2(Cat, Animal);
     var cat1 = new Cat("大黑", "黑色");
     console.log(cat1.species); // 动物
-</code></pre></div></div> </article> <div class="post-content controls__inner"> <div class="controls__item prev"> <span>Previous</span> <a href="/2018/03/05/es6.html"> <span> <svg xmlns="http://www.w3.org/2000/svg" width="6" height="11"> <path fill="fillColor" d="M5.647 1.718c.37-.434.323-1.09-.106-1.465A1.016 1.016 0 0 0 4.095.36L.25 4.875a1.05 1.05 0 0 0 .017 1.378l3.95 4.407c.38.424 1.03.456 1.448.07a1.05 1.05 0 0 0 .07-1.468l-3.34-3.725 3.253-3.819z"/> </svg> </span> ECMAScript 6 入门 </a> </div> <div class="controls__item next"> </div> </div> </div> </main> <footer class="footer"> <div class="container"> <nav class="social"> <a class="social__link" target="_blank" rel="noopener noreferrer" href="https://github.com/GuyYQ"> <svg class="social__icon" viewBox="0 0 20 20" width="20px" height="20px"><path d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg> </a> </nav> <span>&copy; 2018 . All rights reserved.</span> </div> </footer> <script async src="/assets/js/bundle.js"></script> </body> </html>
+</code></pre></div></div> <h2 id="6非构造函数的继承"><strong>6.</strong>非构造函数的继承</h2> <p>一、什么是”非构造函数”的继承？ 比如下面有两个普通对象，不是构造函数</p> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    var Chinese = {
+        nation: '中国'
+    }; 
+
+    var Doctor = {
+        career: '医生'
+    };  
+</code></pre></div></div> <p>怎么让“医生”去继承“中国人”，然后生成一个“中国医生”的对象？</p> <p>1.object()方法</p> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    function object(o) {
+        function F(){}
+        F.prototype = o;
+        return new F();
+    }
+</code></pre></div></div> <p>这个object()函数，其实只做一件事，就是把子对象的prototype属性，指向父对象，从而使得子对象与父对象连在一起。</p> <p>使用的时候，第一步先在父对象的基础上，生成子对象：</p> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    var Doctor = object(Chinese);
+</code></pre></div></div> <p>然后，再加上子对象的属性：</p> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    Doctor.career = '医生';
+</code></pre></div></div> <p>这时，子对象已经继承了父对象的属性了。</p> <p>2.浅拷贝 除了使用“prototype链”以外，还有另一招那个思路：把父对象的属性全部拷贝给子对象，也能实现继承。</p> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    function extendCopy(p) {			　　　　
+        var c = {};			　　　　
+        for (var i in p) {　　　　　　
+            c[i] = p[i];　　　　
+        }			　　　　
+        c.uber = p;	　
+        return c;　　
+    }
+
+    var Doctor = extendCopy(Chinese);
+    Doctor.career = '医生';
+    alert(Doctor.nation); // 中国
+</code></pre></div></div> <p>但是，这样的拷贝有一个问题。那就是，如果父对象的属性等于数组或另一个对象，那么实际上，子对象获得的只是一个内存地址，而不是真正拷贝，因此存在父对象被篡改的可能。</p> <p>3.深拷贝 所谓”深拷贝”，就是能够实现真正意义上的数组和对象的拷贝。它的实现并不难，只要递归调用”浅拷贝”就行了。</p> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    var Chinese = {　　　　
+        nation: '中国',
+        birthPlaces : ['北京','上海','香港'],　
+    };
+
+    function deepCopy(p, c) {
+        var c = c || {};
+        for (var i in p) {
+            if (typeof p[i] === 'object') {
+                c[i] = (p[i].constructor === Array) ? [] : {};
+                deepCopy(p[i], c[i]);
+            } else {					　　　　　　　　　
+                c[i] = p[i];
+            }　　　　
+        }			　　　　
+        return c;　　
+    }
+    var Doctor = deepCopy(Chinese);
+　　 Doctor.birthPlaces.push('厦门');
+    console.log(Doctor.birthPlaces, Chinese.birthPlaces);
+</code></pre></div></div> <p>目前，jQuery库使用的就是这种继承方法。</p> </article> <div class="post-content controls__inner"> <div class="controls__item prev"> <span>Previous</span> <a href="/2018/03/05/es6.html"> <span> <svg xmlns="http://www.w3.org/2000/svg" width="6" height="11"> <path fill="fillColor" d="M5.647 1.718c.37-.434.323-1.09-.106-1.465A1.016 1.016 0 0 0 4.095.36L.25 4.875a1.05 1.05 0 0 0 .017 1.378l3.95 4.407c.38.424 1.03.456 1.448.07a1.05 1.05 0 0 0 .07-1.468l-3.34-3.725 3.253-3.819z"/> </svg> </span> ECMAScript 6 入门 </a> </div> <div class="controls__item next"> </div> </div> </div> </main> <footer class="footer"> <div class="container"> <nav class="social"> <a class="social__link" target="_blank" rel="noopener noreferrer" href="https://github.com/GuyYQ"> <svg class="social__icon" viewBox="0 0 20 20" width="20px" height="20px"><path d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg> </a> </nav> <span>&copy; 2018 . All rights reserved.</span> </div> </footer> <script async src="/assets/js/bundle.js"></script> </body> </html>

@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 08 Mar 2018 14:31:08 +0800</pubDate>
-    <lastBuildDate>Thu, 08 Mar 2018 14:31:08 +0800</lastBuildDate>
+    <pubDate>Thu, 08 Mar 2018 15:33:14 +0800</pubDate>
+    <lastBuildDate>Thu, 08 Mar 2018 15:33:14 +0800</lastBuildDate>
     <generator>Jekyll v3.7.3</generator>
     
       <item>
@@ -324,7 +324,9 @@ console.log(foo instanceof Function); // true
         Child.prototype = new F();
         Child.prototype.constructor = Clild;
         Child.uber = Parent.prototype;
-        &amp;lt;!-- 这里的意思是为子对象设置一个uber属性，直接指向父对象的prototype属性。这等于在子对象上打开一条通道，可以直接调用父对象的方法。这一行放在这里，只是为了实现继承的完备性，纯属备用性质 --&amp;gt;
+        这里的意思是为子对象设置一个uber属性，直接指向父对象的prototype属性。
+        这等于在子对象上打开一条通道，可以直接调用父对象的方法。
+        这一行放在这里，只是为了实现继承的完备性，纯属备用性质 
     }
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;使用的时候&lt;/p&gt;
@@ -359,6 +361,83 @@ console.log(foo instanceof Function); // true
     var cat1 = new Cat(&quot;大黑&quot;, &quot;黑色&quot;);
     console.log(cat1.species); // 动物
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;6非构造函数的继承&quot;&gt;&lt;strong&gt;6.&lt;/strong&gt;非构造函数的继承&lt;/h2&gt;
+
+&lt;p&gt;一、什么是”非构造函数”的继承？
+比如下面有两个普通对象，不是构造函数&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    var Chinese = {
+        nation: '中国'
+    }; 
+
+    var Doctor = {
+        career: '医生'
+    };  
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;怎么让“医生”去继承“中国人”，然后生成一个“中国医生”的对象？&lt;/p&gt;
+
+&lt;p&gt;1.object()方法&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    function object(o) {
+        function F(){}
+        F.prototype = o;
+        return new F();
+    }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;这个object()函数，其实只做一件事，就是把子对象的prototype属性，指向父对象，从而使得子对象与父对象连在一起。&lt;/p&gt;
+
+&lt;p&gt;使用的时候，第一步先在父对象的基础上，生成子对象：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    var Doctor = object(Chinese);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;然后，再加上子对象的属性：&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    Doctor.career = '医生';
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;这时，子对象已经继承了父对象的属性了。&lt;/p&gt;
+
+&lt;p&gt;2.浅拷贝
+除了使用“prototype链”以外，还有另一招那个思路：把父对象的属性全部拷贝给子对象，也能实现继承。&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    function extendCopy(p) {			　　　　
+        var c = {};			　　　　
+        for (var i in p) {　　　　　　
+            c[i] = p[i];　　　　
+        }			　　　　
+        c.uber = p;	　
+        return c;　　
+    }
+
+    var Doctor = extendCopy(Chinese);
+    Doctor.career = '医生';
+    alert(Doctor.nation); // 中国
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;但是，这样的拷贝有一个问题。那就是，如果父对象的属性等于数组或另一个对象，那么实际上，子对象获得的只是一个内存地址，而不是真正拷贝，因此存在父对象被篡改的可能。&lt;/p&gt;
+
+&lt;p&gt;3.深拷贝
+所谓”深拷贝”，就是能够实现真正意义上的数组和对象的拷贝。它的实现并不难，只要递归调用”浅拷贝”就行了。&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    var Chinese = {　　　　
+        nation: '中国',
+        birthPlaces : ['北京','上海','香港'],　
+    };
+
+    function deepCopy(p, c) {
+        var c = c || {};
+        for (var i in p) {
+            if (typeof p[i] === 'object') {
+                c[i] = (p[i].constructor === Array) ? [] : {};
+                deepCopy(p[i], c[i]);
+            } else {					　　　　　　　　　
+                c[i] = p[i];
+            }　　　　
+        }			　　　　
+        return c;　　
+    }
+    var Doctor = deepCopy(Chinese);
+　　 Doctor.birthPlaces.push('厦门');
+    console.log(Doctor.birthPlaces, Chinese.birthPlaces);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;目前，jQuery库使用的就是这种继承方法。&lt;/p&gt;
+
 </description>
         <pubDate>Tue, 06 Mar 2018 00:00:00 +0800</pubDate>
         <link>http://localhost:4000/2018/03/06/object.html</link>
